@@ -12,6 +12,37 @@ namespace ControllerDEMO.logic
         //public string connectionString = "Data Source=localhost;Initial Catalog=JOSHYTESTIMONYdatadb;Integrated Security=True";
 
         public string connectionString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
+        public ControllerDemo()
+        {
+            EnsureTableExists();
+        }
+        private void EnsureTableExists()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string sql = @"
+                    IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='EmployeeLeaveTypes' AND xtype='U')
+                    BEGIN
+                        CREATE TABLE EmployeeLeaveTypes (
+                            LeaveTypeID NVARCHAR(50) PRIMARY KEY,
+                            LeaveTypeName NVARCHAR(100),
+                            MaxDaysPerYear INT,
+                            CarryForwardAllowed BIT,
+                            PaidLeave BIT,
+                            RequiresApproval BIT,
+                            ImageData VARBINARY(MAX) NULL,
+                            FileData VARBINARY(MAX) NULL
+                        )
+                    END";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public string generateCode()
         {
             string prefix = "L";
@@ -105,7 +136,9 @@ namespace ControllerDEMO.logic
         }
 
         public void saveLeaveTypeImage(string leaveTypeID, byte[] imageBytes)
+
         {
+            EnsureTableExists();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
