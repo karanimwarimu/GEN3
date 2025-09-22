@@ -11,8 +11,8 @@ A simple C# application that allows users to:
 
 ## Features
 - 📂 Upload and save files.
-- to be implemented later : Display data in a grid/table.
-- 🔑 Generate unique IDs that include the date.
+-  DisplayS data in a grid/table.
+- 🔑 Generate unique IDs that uses the current date  and previous id from db .
 - 🗄️ Store all information in SQL Server.
 
 ---
@@ -50,10 +50,9 @@ A simple C# application that allows users to:
     <startup> 
         <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
     </startup>
-	<connectionStrings>
-		<add name="MyDbConnection"
-			 connectionString="Server=localhost;Database=owndatabase User Id=ownid;Password=ownpassword;"
-			 providerName="System.Data.SqlClient" />
+		<add name="MyDbConnection"	 
+				 connectionString="Server=SERVERNAME\INSTANCE;Database=OWNDATABASENAME;Trusted_Connection=True;TrustServerCertificate=True"
+				 providerName="System.Data.SqlClient" />
 	</connectionStrings>
 	
 </configuration> 
