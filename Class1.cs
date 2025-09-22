@@ -95,7 +95,7 @@ namespace ControllerDEMO.logic
         
         public void saveLeaveTypeID ( string leaveTypeID)
         {
-
+            EnsureTableExists();
             using ( SqlConnection conn = new SqlConnection(connectionString)) 
             {
                 conn.Open();
@@ -188,3 +188,9 @@ namespace ControllerDEMO.logic
 
     }
 }
+/*
+ connectiontring="Server=localhost;Database=owndatabase User Id=sa;Password=root;"
+			 connectionString= "Server=SENSEI\\SERVERKARANI;Database=Dummy;Trusted_Connection=True;TrustServerCertificate=True;"
+			 providerName="System.Data.SqlClient" />
+		<add name="TrustedDbConnection"
+ */

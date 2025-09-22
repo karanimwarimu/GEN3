@@ -36,7 +36,7 @@ namespace ControllerDEMO.form
             string showID = showID_txtbox.Text;
             controller.saveLeaveTypeID(showID);
 
-            if(String.IsNullOrEmpty(showID))
+            if (String.IsNullOrEmpty(showID))
             {
                 MessageBox.Show("ID NOT GENERATED ,CANT SAVE ", " ERROR!! ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -65,7 +65,7 @@ namespace ControllerDEMO.form
                 MessageBox.Show("Image conversion failed. Please select a valid image.");
                 return;
             }
-            controller.saveLeaveTypeImage( showID , imageBytes);
+            controller.saveLeaveTypeImage(showID, imageBytes);
 
             if (fileData == null)
             {
@@ -80,33 +80,33 @@ namespace ControllerDEMO.form
 
         private void displaybtn_click(object sender, EventArgs e)
         {
-           // try
+            // try
             //{
-                using (SqlConnection conn = new SqlConnection(controller.connectionString))
-                {
-                    conn.Open();
-                    string sqlString = " SELECT * FROM EmployeeLeaveTypes ";
+            using (SqlConnection conn = new SqlConnection(controller.connectionString))
+            {
+                conn.Open();
+                string sqlString = " SELECT * FROM EmployeeLeaveTypes ";
 
-                    SqlDataAdapter adpt = new SqlDataAdapter(sqlString, conn);
-                    DataTable dt = new DataTable(); 
-                    adpt.Fill(dt);
-                    dataGridView.DataSource = dt;
-                }
-           // }
-           // catch( Exception ex) {
-           // {
-               // MessageBox.Show("error handling data ", " ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SqlDataAdapter adpt = new SqlDataAdapter(sqlString, conn);
+                DataTable dt = new DataTable();
+                adpt.Fill(dt);
+                dataGridView.DataSource = dt;
+            }
+            // }
+            // catch( Exception ex) {
+            // {
+            // MessageBox.Show("error handling data ", " ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-           // }
+            // }
         }
-      
+
         private void choosePic_button_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
 
             ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
 
-            if (ofd.ShowDialog()  == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 pictureBox1.Image = Image.FromFile(ofd.FileName);
 
@@ -122,11 +122,11 @@ namespace ControllerDEMO.form
             {
                 filepath_textBox.Text = offd.FileName;
                 string filePathSelected = filepath_textBox.Text;
-               fileData =  File.ReadAllBytes(filePathSelected);
+                fileData = File.ReadAllBytes(filePathSelected);
             }
-          
+
         }
 
-k
+        
     }
 }
